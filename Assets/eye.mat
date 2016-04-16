@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: triangle
+  m_Name: eye
   m_Shader: {fileID: 4800000, guid: a146d02c2ef55774bb77310c783dc98e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: dc34d84a9ff1e1b41b44eeef414e515b, type: 3}
+          m_Texture: {fileID: 2800000, guid: e5fee85cf44b4a144971df271f35791a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:

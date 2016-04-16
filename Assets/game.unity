@@ -153,7 +153,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 108
-    _typelessdata: 000000bf000000bf000000000000803f44c92e3f000000000000803f0000000000000000000000bf0000003f000000000000803f44c92e3f000000000000803f0000803f000000000000003f000000bf000000000000803f44c92e3f000000000000803f000000000000803f
+    _typelessdata: 000000bf000000bf000000000000803f44c92e3f000000000000803f0000000000000000000000bf0000003f000000000000803f44c92e3f000000000000803f000000000000803f0000003f000000bf000000000000803f44c92e3f000000000000803f0000803f00000000
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -277,7 +277,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   color: {r: 1, g: 0.68275857, b: 0, a: 1}
+  x: 1
+  y: 0
   regenerate: 0
+  moved: 0
 --- !u!4 &1944101170
 Transform:
   m_ObjectHideFlags: 0
@@ -349,7 +352,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

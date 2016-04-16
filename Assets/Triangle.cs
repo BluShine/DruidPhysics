@@ -12,7 +12,8 @@ public class Triangle : MonoBehaviour {
     static float MOVESPEED = .2f;
     float moveTime = 0;
     Vector3 prevPos = Vector3.zero;
-
+    float prevRotation = 0;
+    float targetRotation = 0;
 
     public bool regenerate = false;
     public bool moved = false;
@@ -35,12 +36,30 @@ public class Triangle : MonoBehaviour {
         {
             moveTime = MOVESPEED;
             prevPos = transform.position;
+            prevRotation = transform.rotation.eulerAngles.z;
             moved = !moved;
+            switch(direction)
+            {
+                case 0:
+                    targetRotation = 0;
+                    break;
+                case 1:
+                    targetRotation = 90f;
+                    break;
+                case 2:
+                    targetRotation = 180f;
+                    break;
+                case 3:
+                    targetRotation = 270f;
+                    break;
+            }
         }
         if(moveTime > 0)
         {
             moveTime = Mathf.Max(0, moveTime - Time.deltaTime);
             transform.position = Vector3.Lerp(new Vector3(x, y), prevPos, moveTime / MOVESPEED);
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, targetRotation), 
+                Quaternion.Euler(0, 0, prevRotation), moveTime / MOVESPEED);
         }
 
 	}

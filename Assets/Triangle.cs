@@ -7,8 +7,15 @@ public class Triangle : MonoBehaviour {
     [Range(0, 3)]
     public int direction = 0;
     public Color color = Color.gray;
+    public int x = 0;
+    public int y = 0;
+    static float MOVESPEED = .2f;
+    float moveTime = 0;
+    Vector3 prevPos = Vector3.zero;
+
 
     public bool regenerate = false;
+    public bool moved = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,11 +24,25 @@ public class Triangle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (regenerate)
+        //rebuild triangle
+        if (regenerate)
         {
             BuildTriangle();
             regenerate = false;
         }
+
+        if(moved)
+        {
+            moveTime = MOVESPEED;
+            prevPos = transform.position;
+            moved = !moved;
+        }
+        if(moveTime > 0)
+        {
+            moveTime = Mathf.Max(0, moveTime - Time.deltaTime);
+            transform.position = Vector3.Lerp(new Vector3(x, y), prevPos, moveTime / MOVESPEED);
+        }
+
 	}
 
     void BuildTriangle()
@@ -36,8 +57,8 @@ public class Triangle : MonoBehaviour {
         mesh.triangles = new int[3] { 0, 1, 2 };
         mesh.uv = new Vector2[3] {
             new Vector2(0, 0),
-            new Vector2(1, 0),
-            new Vector2(0, 1) };
+            new Vector2(0, 1),
+            new Vector2(1, 0) };
         mesh.colors = new Color[] { color, color, color };
     }
 }

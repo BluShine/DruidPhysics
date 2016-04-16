@@ -4,8 +4,8 @@ using System.Collections;
 [ExecuteInEditMode]
 public class Triangle : MonoBehaviour {
 
-    [Range(0, 3)]
-    public int direction = 0;
+    public enum Alignment : int { SW = 0, SE = 1, NE = 2, NW =3 };
+    public Alignment direction = 0;
     public Color color = Color.gray;
     public int x = 0;
     public int y = 0;
@@ -48,16 +48,16 @@ public class Triangle : MonoBehaviour {
             moved = !moved;
             switch(direction)
             {
-                case 0:
+                case Alignment.SW:
                     targetRotation = 0;
                     break;
-                case 1:
+                case Alignment.SE:
                     targetRotation = 90f;
                     break;
-                case 2:
+                case Alignment.NE:
                     targetRotation = 180f;
                     break;
-                case 3:
+                case Alignment.NW:
                     targetRotation = 270f;
                     break;
             }

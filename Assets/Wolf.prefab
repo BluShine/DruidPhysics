@@ -81,7 +81,7 @@ GameObject:
   - 33: {fileID: 3339356}
   - 23: {fileID: 2310498}
   m_Layer: 0
-  m_Name: triangle
+  m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -556,6 +556,7 @@ MonoBehaviour:
   y: 1
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11427842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -573,6 +574,7 @@ MonoBehaviour:
   y: 1
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11435158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,6 +592,7 @@ MonoBehaviour:
   y: 1
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11441876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -607,6 +610,7 @@ MonoBehaviour:
   y: 0
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11442166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,6 +628,7 @@ MonoBehaviour:
   y: 1
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11459266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -641,6 +646,7 @@ MonoBehaviour:
   y: 0
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11480552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,6 +664,7 @@ MonoBehaviour:
   y: 1
   regenerate: 0
   moved: 0
+  z: 0
 --- !u!114 &11499190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,6 +682,7 @@ MonoBehaviour:
   y: 1
   regenerate: 0
   moved: 0
+  z: -1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -10,6 +10,7 @@ public class Triangle : MonoBehaviour {
     public int x = 0;
     public int y = 0;
     static float MOVESPEED = .2f;
+    static float MOVEDELAY = .1f;
     float moveTime = 0;
     Vector3 prevPos = Vector3.zero;
     float prevRotation = 0;
@@ -17,6 +18,7 @@ public class Triangle : MonoBehaviour {
 
     public bool regenerate = false;
     public bool moved = false;
+    public float z = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +36,8 @@ public class Triangle : MonoBehaviour {
 
         if(moved)
         {
-            moveTime = MOVESPEED;
+            if(moveTime == 0)
+                moveTime = MOVESPEED;
             prevPos = transform.position;
             prevRotation = transform.rotation.eulerAngles.z;
             moved = !moved;
@@ -57,14 +60,22 @@ public class Triangle : MonoBehaviour {
         if(moveTime > 0)
         {
             moveTime = Mathf.Max(0, moveTime - Time.deltaTime);
-            if (Application.isEditor)
+            if (Application.isEditor && !Application.isPlaying)
                 moveTime = 0;
-            transform.position = Vector3.Lerp(new Vector3(x, y), prevPos, moveTime / MOVESPEED);
+            transform.position = Vector3.Lerp(new Vector3(x, y, z), prevPos, moveTime / MOVESPEED);
             transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, targetRotation), 
                 Quaternion.Euler(0, 0, prevRotation), moveTime / MOVESPEED);
         }
 
 	}
+
+    public void move(int xTarget, int yTarget)
+    {
+        x = xTarget;
+        y = yTarget;
+        moved = true;
+        moveTime = MOVESPEED + Random.value * MOVEDELAY;
+    }
 
     void BuildTriangle()
     {

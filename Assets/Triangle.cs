@@ -12,9 +12,14 @@ public class Triangle : MonoBehaviour {
     static float MOVESPEED = .2f;
     static float MOVEDELAY = .1f;
     float moveTime = 0;
+    public float shakeTime = 0;
     Vector3 prevPos = Vector3.zero;
     float prevRotation = 0;
     float targetRotation = 0;
+    Vector2 lastShake = Vector2.zero;
+    Vector2 nextShake = Vector2.zero;
+    float shakeyShake = 0;
+    static float SHAKEYNESSSPEED = .05f;
 
     public bool regenerate = false;
     public bool moved = false;
@@ -66,7 +71,26 @@ public class Triangle : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, targetRotation), 
                 Quaternion.Euler(0, 0, prevRotation), moveTime / MOVESPEED);
         }
-
+        if(shakeTime > 0)
+        {
+            shakeTime = Mathf.Max(0, shakeTime - Time.deltaTime);
+            shakeyShake -= Time.deltaTime;
+            if (shakeyShake < 0)
+            {
+                shakeyShake += SHAKEYNESSSPEED;
+                lastShake = nextShake;
+                if (shakeTime < SHAKEYNESSSPEED * 2)
+                {
+                    nextShake = Vector2.zero;
+                }
+                else
+                {
+                    nextShake = new Vector2(Random.value * .4f - .2f, Random.value * .4f - .2f);
+                }
+            }
+            Vector2 shakeVector = Vector2.Lerp(nextShake, lastShake, shakeyShake / SHAKEYNESSSPEED);
+            transform.position = new Vector3(x + shakeVector.x, y + shakeVector.y, z);
+        }
 	}
 
     public void move(int xTarget, int yTarget)

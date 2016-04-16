@@ -57,6 +57,8 @@ public class Triangle : MonoBehaviour {
         if(moveTime > 0)
         {
             moveTime = Mathf.Max(0, moveTime - Time.deltaTime);
+            if (Application.isEditor)
+                moveTime = 0;
             transform.position = Vector3.Lerp(new Vector3(x, y), prevPos, moveTime / MOVESPEED);
             transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, targetRotation), 
                 Quaternion.Euler(0, 0, prevRotation), moveTime / MOVESPEED);
@@ -67,7 +69,7 @@ public class Triangle : MonoBehaviour {
     void BuildTriangle()
     {
         MeshFilter mFilter = GetComponent<MeshFilter>();
-        Mesh mesh = mFilter.sharedMesh;
+        Mesh mesh = mFilter.mesh;
 
         mesh.vertices = new Vector3[3] {
             new Vector3(-.5f, -.5f),

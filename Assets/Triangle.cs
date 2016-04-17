@@ -29,7 +29,7 @@ public class Triangle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
@@ -106,7 +106,7 @@ public class Triangle : MonoBehaviour {
     void BuildTriangle()
     {
         MeshFilter mFilter = GetComponent<MeshFilter>();
-        Mesh mesh = mFilter.mesh;
+        Mesh mesh = new Mesh();
 
         mesh.vertices = new Vector3[3] {
             new Vector3(-.5f, -.5f),
@@ -118,5 +118,7 @@ public class Triangle : MonoBehaviour {
             new Vector2(0, 1),
             new Vector2(1, 0) };
         mesh.colors = new Color[] { color, color, color };
+
+        mFilter.mesh = mesh;
     }
 }

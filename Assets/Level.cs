@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
 
     public static Level instance;
+
+    public GameObject trianglePrefab;
 
     public enum MoveDir : int { up = 0, right = 1, down = 2, left = 3};
     List<Triangle> levelTriangles;
@@ -59,5 +62,44 @@ public class Level : MonoBehaviour {
                     tile.second = t;
         }
         return tile;
+    }
+}
+
+[CustomEditor(typeof(Level))]
+public class LevelEditor : Editor
+{
+    Color brushColor = Color.gray;
+
+    void OnEnable()
+    {
+
+    } 
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        {
+            brushColor = EditorGUILayout.ColorField(brushColor);
+            
+        }
+    }
+
+    void OnSceneGUI()
+    {
+        Event current = Event.current;
+        if(current.type == EventType.KeyDown && current.keyCode == KeyCode.Space)
+        {
+            GameObject prefab = (GameObject)serializedObject.FindProperty("trianglePrefab").objectReferenceValue;
+            Vector3 pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
+            Triangle tri = GameObject.Instantiate(prefab).GetComponent<Triangle>();
+            tri.transform.parent = ((Level)serializedObject.targetObject).gameObject.transform;
+            tri.x = Mathf.RoundToInt(pos.x);
+            tri.y = Mathf.RoundToInt(pos.y);
+            tri.color = brushColor;
+            tri.regenerate = true;
+            tri.moved = true;
+            tri.name = "triangle";
+            current.Use();
+        }
     }
 }

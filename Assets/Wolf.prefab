@@ -166,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104748}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 1, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194288}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: -2, y: 1, z: 0}
+  m_LocalPosition: {x: -3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -202,7 +202,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196856}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
-  m_LocalPosition: {x: -1, y: 1, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -214,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -226,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -238,7 +238,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187216}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -250,7 +250,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155218}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 493342}
@@ -552,11 +552,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 3
   color: {r: 0.50735295, g: 0.5061094, b: 0.49989188, a: 1}
-  x: 0
-  y: 1
+  x: -1
+  y: 0
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11427842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,11 +572,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 3
   color: {r: 0.45588237, g: 0.43443677, b: 0.3821367, a: 1}
-  x: -2
-  y: 1
+  x: -3
+  y: 0
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11435158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -588,11 +592,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 2
   color: {r: 0.47794116, g: 0.45239604, b: 0.36899868, a: 1}
-  x: -1
-  y: 1
+  x: -2
+  y: 0
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11441876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -606,11 +612,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   color: {r: 0.74264705, g: 0.7144337, b: 0.57336724, a: 1}
-  x: -1
-  y: 0
+  x: -2
+  y: -1
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11442166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,11 +632,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   color: {r: 0.5955882, g: 0.57515144, b: 0.47296712, a: 1}
-  x: -1
-  y: 1
+  x: -2
+  y: 0
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11459266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -642,11 +652,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 2
   color: {r: 0.8014706, g: 0.7778979, b: 0.6600346, a: 1}
-  x: 0
-  y: 0
+  x: -1
+  y: -1
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11480552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -660,11 +672,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 1
   color: {r: 0.46323532, g: 0.45471996, b: 0.4121432, a: 1}
-  x: 0
-  y: 1
+  x: -1
+  y: 0
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: 0
+  parent: {fileID: 0}
 --- !u!114 &11499190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -678,11 +692,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   color: {r: 0.6544118, g: 0.6512039, b: 0.6351644, a: 1}
-  x: 1
-  y: 1
+  x: 0
+  y: 0
+  shakeTime: 0
   regenerate: 0
   moved: 0
   z: -1
+  parent: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

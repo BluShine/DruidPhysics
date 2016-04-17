@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4465505, y: 0.17803082, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animals:
-  - {fileID: 119098, guid: 5d5b16659f14bb64cb69e965f4a2ce89, type: 2}
   - {fileID: 153318, guid: 5be000a0c88330f4c8d86efd55a34a7e, type: 2}
+  - {fileID: 119098, guid: 5d5b16659f14bb64cb69e965f4a2ce89, type: 2}
   - {fileID: 173034, guid: 5b29fda7bb443354382b3fd98e0413e8, type: 2}
   - {fileID: 146132, guid: ebe75d3153b21f441aba288271247e7f, type: 2}
   - {fileID: 130844, guid: 253f1d2a01e9a204382e95cd06b6e4e4, type: 2}

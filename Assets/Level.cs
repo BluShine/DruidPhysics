@@ -11,7 +11,7 @@ public class Level : MonoBehaviour {
     public Gradient brushColors;
 
     public enum MoveDir : int { up = 0, right = 1, down = 2, left = 3};
-    List<Triangle> levelTriangles;
+    public List<Triangle> levelTriangles;
 
     public List<Block> blocks;
 
@@ -156,7 +156,7 @@ public class Level : MonoBehaviour {
             }
         }
         if (goalReached)
-            Debug.Log("win!");
+            Goal.instance.win();
     }
 
     public TileState getBlockTrianglesAt(int x, int y)

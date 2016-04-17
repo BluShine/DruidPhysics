@@ -238,7 +238,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 1
+  z: -0.5
   parent: {fileID: 0}
 --- !u!114 &11436964
 MonoBehaviour:
@@ -258,7 +258,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 1
+  z: -0.5
   parent: {fileID: 0}
 --- !u!114 &11470702
 MonoBehaviour:
@@ -271,6 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35357f429471e6c47b564eb1fb00cae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triangles: []
+  nextScene: 0
 --- !u!114 &11483148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,7 +291,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 1
+  z: -0.5
   parent: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -297,7 +299,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: moved
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: regenerate
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123618}

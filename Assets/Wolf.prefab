@@ -557,7 +557,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11427842
 MonoBehaviour:
@@ -577,7 +577,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11435158
 MonoBehaviour:
@@ -597,7 +597,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11441876
 MonoBehaviour:
@@ -617,7 +617,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11442166
 MonoBehaviour:
@@ -637,7 +637,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11459266
 MonoBehaviour:
@@ -657,7 +657,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11480552
 MonoBehaviour:
@@ -677,7 +677,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!114 &11499190
 MonoBehaviour:
@@ -697,7 +697,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: -1
+  z: -3
   parent: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -705,7 +705,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: moved
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: z
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146132}

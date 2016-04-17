@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     public int unlockedAnimals = 1;
     GameObject animalObj;
     List<Triangle> playerTriangles;
-    Triangle eye;
+    public Triangle eye;
     bool tapped = false;
     float moveCooldown = 0;
     public static float MOVESPEED = .3f;
@@ -22,16 +22,21 @@ public class Player : MonoBehaviour {
         instance = this;
         playerTriangles = new List<Triangle>();
         animalObj = Instantiate(animals[currentAnimal]);
-        foreach(Triangle tri in animalObj.GetComponentsInChildren<Triangle>())
+        int xOffset = Mathf.RoundToInt(transform.position.x);
+        int yOffset = Mathf.RoundToInt(transform.position.y);
+        foreach (Triangle tri in animalObj.GetComponentsInChildren<Triangle>())
         {
             playerTriangles.Add(tri);
             if(tri.name == "eye")
             {
                 eye = tri;
             }
+            tri.x += xOffset;
+            tri.y += yOffset;
             tri.regenerate = true;
             tri.moved = true;
             tri.parent = gameObject;
+           
         }
 	}
 	

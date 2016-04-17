@@ -173,7 +173,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: -1
+  z: -3
   parent: {fileID: 0}
 --- !u!114 &11497714
 MonoBehaviour:
@@ -193,7 +193,7 @@ MonoBehaviour:
   shakeTime: 0
   regenerate: 0
   moved: 0
-  z: 0
+  z: -2
   parent: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
@@ -201,7 +201,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: z
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119098}

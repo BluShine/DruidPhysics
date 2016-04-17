@@ -32,7 +32,11 @@ public class Goal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(won)
+        if (Input.GetButtonDown("Reset"))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
+        if (won)
         {
             endingTimer -= Time.deltaTime;
             if(endingTimer <= 0)

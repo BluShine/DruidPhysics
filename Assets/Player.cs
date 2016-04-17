@@ -146,7 +146,7 @@ public class Player : MonoBehaviour {
         {
             move = true;
             dir = Level.MoveDir.left;
-        } else if (Input.GetButton("Fire3"))
+        } else if (Input.GetButton("Fire"))
         {
             shapeshift();
             return;

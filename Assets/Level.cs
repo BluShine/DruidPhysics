@@ -121,6 +121,22 @@ public class Level : MonoBehaviour {
         return true;
     }
 
+    public bool openTriangle(int x, int y, Triangle.Alignment align)
+    {
+        TileState ts = getTrianglesAt(x, y);
+        TileState ts2 = getBlockTrianglesAt(x, y);
+        if (ts.first != null && ((int)ts.first.direction + 2) % 4 != (int)align)
+            return false;
+        if (ts.second != null && ((int)ts.second.direction + 2) % 4 != (int)align)
+            return false;
+        if (ts2.first != null && ((int)ts2.first.direction + 2) % 4 != (int)align)
+            return false;
+        if (ts2.second != null && ((int)ts2.second.direction + 2) % 4 != (int)align)
+            return false;
+
+        return true;
+    }
+
     public void checkGoal()
     {
         bool goalReached = true;
@@ -141,6 +157,34 @@ public class Level : MonoBehaviour {
         }
         if (goalReached)
             Debug.Log("win!");
+    }
+
+    public TileState getBlockTrianglesAt(int x, int y)
+    {
+        List<Triangle> gotTris = new List<Triangle>();
+        foreach (Block b in blocks)
+        {
+            TileState t = b.getTrianglesAt(x, y);
+            if (t.first != null)
+                gotTris.Add(t.first);
+            if (t.second != null)
+                gotTris.Add(t.second);
+        }
+
+        TileState rTile = new TileState();
+        switch (gotTris.Count)
+        {
+            default:
+                break;
+            case 1:
+                rTile.first = gotTris[0];
+                break;
+            case 2:
+                rTile.first = gotTris[0];
+                rTile.second = gotTris[1];
+                break;
+        }
+        return rTile;
     }
 
     public TileState getBlockAndPlayerTrianglesAt(int x, int y)

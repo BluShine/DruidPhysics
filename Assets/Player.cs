@@ -14,8 +14,8 @@ public class Player : MonoBehaviour {
     float moveCooldown = 0;
     public static float MOVESPEED = .3f;
     float shiftTimer = 0;
-    bool shiftOut = false;
-    bool badShift = false;
+    bool shiftStarting = false;
+    bool shifting = false;
 
 	// Use this for initialization
 	void Start () {
@@ -37,9 +37,59 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (moveCooldown == 0)
+        if (moveCooldown == 0 && !shifting)
             movement();
         moveCooldown = Mathf.Max(0, moveCooldown - Time.deltaTime);
+
+        if(shifting)
+        {
+            shiftTimer = Mathf.Max(0, shiftTimer - Time.deltaTime);
+            if (shiftTimer == 0)
+            {
+                if (shiftStarting)
+                {
+                    
+                    shiftStarting = false;
+                    int x = eye.x;
+                    int y = eye.y;
+                    Vector3 pos = eye.transform.position;
+                    //destroy old animal
+                    GameObject.Destroy(eye.transform.parent.gameObject);
+                    foreach (Triangle tri in playerTriangles)
+                    {
+                        GameObject.Destroy(tri.gameObject);
+                    }
+
+                    GameObject nAnimal = (GameObject)Instantiate(animals[currentAnimal], pos, Quaternion.Euler(0, 0, 0));
+                    playerTriangles = new List<Triangle>();
+                    foreach (Triangle tri in nAnimal.transform.GetComponentsInChildren<Triangle>())
+                    {
+                        playerTriangles.Add(tri);
+                        if (tri.name == "eye")
+                            eye = tri;
+                        tri.move(tri.x + x, tri.y + y);
+                    }
+                    shiftTimer = MOVESPEED;
+                    Level.instance.checkGoal();
+                }
+                else
+                {
+                    //check for a bad shift
+                    bool badShift = false;
+                    foreach(Triangle tri in playerTriangles)
+                    {
+                        if (!Level.instance.openTriangle(tri.x, tri.y, tri.direction))
+                            badShift = true;
+                    }
+                    if(badShift)
+                    {
+                        shapeshift();
+                    }
+                    else
+                        shifting = false;
+                }
+            }
+        }
 	}
 
     public TileState getTile(int xPos, int yPos)
@@ -58,9 +108,14 @@ public class Player : MonoBehaviour {
 
     private void shapeshift()
     {
-        shiftTimer = MOVESPEED * 2;
+        shifting = true;
+        shiftTimer = MOVESPEED;
+        shiftStarting = true;
         currentAnimal = (currentAnimal + 1) % unlockedAnimals;
-
+        foreach(Triangle tri in playerTriangles)
+        {
+            tri.move(eye.x, eye.y);
+        }
     }
 
     private void movement()
@@ -86,6 +141,10 @@ public class Player : MonoBehaviour {
         {
             move = true;
             dir = Level.MoveDir.left;
+        } else if (Input.GetButton("Fire3"))
+        {
+            shapeshift();
+            return;
         }
 
         if (move)

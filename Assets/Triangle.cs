@@ -47,8 +47,10 @@ public class Triangle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	    
-	}
+        BuildTriangle();
+        transform.position = transform.parent.position;
+        moved = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -25,6 +25,7 @@ public class Player : MonoBehaviour {
             }
             tri.regenerate = true;
             tri.moved = true;
+            tri.parent = gameObject;
         }
 	}
 	
@@ -40,7 +41,20 @@ public class Player : MonoBehaviour {
         if (Input.GetAxis("Vertical") > 0)
         {
             moveCooldown = MOVESPEED;
-            foreach(Triangle tri in playerTriangles)
+            //check if each triangle can move
+            bool stopped = false;
+            foreach (Triangle tri in playerTriangles)
+            {
+                if (!Level.instance.canMove(tri, Level.MoveDir.up))
+                {
+                    tri.shakeTime = MOVESPEED;
+                    stopped = true; ;
+                }
+            }
+            if (stopped)
+                return;
+            //move
+            foreach (Triangle tri in playerTriangles)
             {
                 tri.move(tri.x, tri.y + 1);
             }
@@ -48,6 +62,19 @@ public class Player : MonoBehaviour {
         else if (Input.GetAxis("Vertical") < 0)
         {
             moveCooldown = MOVESPEED;
+            //check if each triangle can move
+            bool stopped = false;
+            foreach (Triangle tri in playerTriangles)
+            {
+                if (!Level.instance.canMove(tri, Level.MoveDir.down))
+                {
+                    tri.shakeTime = MOVESPEED;
+                    stopped = true; ;
+                }
+            }
+            if (stopped)
+                return;
+            //move
             foreach (Triangle tri in playerTriangles)
             {
                 tri.move(tri.x, tri.y - 1);
@@ -56,6 +83,19 @@ public class Player : MonoBehaviour {
         else if (Input.GetAxis("Horizontal") > 0)
         {
             moveCooldown = MOVESPEED;
+            //check if each triangle can move
+            bool stopped = false;
+            foreach (Triangle tri in playerTriangles)
+            {
+                if (!Level.instance.canMove(tri, Level.MoveDir.right))
+                {
+                    tri.shakeTime = MOVESPEED;
+                    stopped = true; ;
+                }
+            }
+            if (stopped)
+                return;
+            //move
             foreach (Triangle tri in playerTriangles)
             {
                 tri.move(tri.x + 1, tri.y);
@@ -64,6 +104,19 @@ public class Player : MonoBehaviour {
         else if (Input.GetAxis("Horizontal") < 0)
         {
             moveCooldown = MOVESPEED;
+            //check if each triangle can move
+            bool stopped = false;
+            foreach (Triangle tri in playerTriangles)
+            {
+                if (!Level.instance.canMove(tri, Level.MoveDir.left))
+                {
+                    tri.shakeTime = MOVESPEED;
+                    stopped = true; ;
+                }
+            }
+            if (stopped)
+                return;
+            //move
             foreach (Triangle tri in playerTriangles)
             {
                 tri.move(tri.x - 1, tri.y);

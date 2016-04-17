@@ -25,6 +25,8 @@ public class Triangle : MonoBehaviour {
     public bool moved = false;
     public float z = 0;
 
+    public GameObject parent;
+
 	// Use this for initialization
 	void Start () {
 	

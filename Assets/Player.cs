@@ -100,6 +100,7 @@ public class Player : MonoBehaviour {
             {
                 b.push(dir);
             }
+            Level.instance.blocksToPush = new List<Block>();
         }
     }
 }

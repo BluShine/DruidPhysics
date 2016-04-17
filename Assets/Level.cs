@@ -121,6 +121,61 @@ public class Level : MonoBehaviour {
         return true;
     }
 
+    public void checkGoal()
+    {
+        bool goalReached = true;
+        foreach(Triangle t in Goal.instance.triangles)
+        {
+            TileState tile = getBlockAndPlayerTrianglesAt(t.x, t.y);
+            if(tile.second != null)
+            {
+                tile.first.Pulsing = true;
+                tile.second.Pulsing = true;
+            } else if (tile.first != null && tile.first.direction == t.direction)
+            {
+                tile.first.Pulsing = true;
+            } else
+            {
+                goalReached = false;
+            }
+        }
+        if (goalReached)
+            Debug.Log("win!");
+    }
+
+    public TileState getBlockAndPlayerTrianglesAt(int x, int y)
+    {
+        List<Triangle> gotTris = new List<Triangle>();
+        foreach(Block b in blocks)
+        {
+            TileState t = b.getTrianglesAt(x, y);
+            if (t.first != null)
+                gotTris.Add(t.first);
+            if (t.second != null)
+                gotTris.Add(t.second);
+        }
+        TileState tp = Player.instance.getTile(x, y);
+        if (tp.first != null)
+            gotTris.Add(tp.first);
+        if (tp.second != null)
+            gotTris.Add(tp.second);
+
+        TileState rTile = new TileState();
+        switch (gotTris.Count)
+        {
+            default:
+                break;
+            case 1:
+                rTile.first = gotTris[0];
+                break;
+            case 2:
+                rTile.first = gotTris[0];
+                rTile.second = gotTris[1];
+                break;
+        }
+        return rTile;
+    }
+
     public TileState getTrianglesAt(int x, int y)
     {
         TileState tile = new TileState();

@@ -3,17 +3,23 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
+    public static Player instance;
     public List<GameObject> animals;
     public int currentAnimal = 0;
+    public int unlockedAnimals = 1;
     GameObject animalObj;
     List<Triangle> playerTriangles;
     Triangle eye;
     bool tapped = false;
     float moveCooldown = 0;
     public static float MOVESPEED = .3f;
+    float shiftTimer = 0;
+    bool shiftOut = false;
+    bool badShift = false;
 
 	// Use this for initialization
 	void Start () {
+        instance = this;
         playerTriangles = new List<Triangle>();
         animalObj = Instantiate(animals[currentAnimal]);
         foreach(Triangle tri in animalObj.GetComponentsInChildren<Triangle>())
@@ -35,6 +41,27 @@ public class Player : MonoBehaviour {
             movement();
         moveCooldown = Mathf.Max(0, moveCooldown - Time.deltaTime);
 	}
+
+    public TileState getTile(int xPos, int yPos)
+    {
+        TileState tile = new TileState();
+        foreach (Triangle t in playerTriangles)
+        {
+            if (t.x == xPos && t.y == yPos)
+                if (tile.first == null)
+                    tile.first = t;
+                else
+                    tile.second = t;
+        }
+        return tile;
+    }
+
+    private void shapeshift()
+    {
+        shiftTimer = MOVESPEED * 2;
+        currentAnimal = (currentAnimal + 1) % unlockedAnimals;
+
+    }
 
     private void movement()
     {
@@ -106,6 +133,8 @@ public class Player : MonoBehaviour {
             {
                 b.alreadyPushed = false;
             }
+
+            Level.instance.checkGoal();
         }
     }
 }

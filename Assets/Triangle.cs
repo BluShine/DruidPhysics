@@ -20,6 +20,9 @@ public class Triangle : MonoBehaviour {
     Vector2 nextShake = Vector2.zero;
     float shakeyShake = 0;
     static float SHAKEYNESSSPEED = .05f;
+    private bool pulsing = false;
+    static float PULSESPEED = .5f;
+    float pulseTime = 0;
 
     public bool regenerate = false;
     public bool moved = false;
@@ -27,8 +30,23 @@ public class Triangle : MonoBehaviour {
 
     public GameObject parent;
 
-	// Use this for initialization
-	void Start () {
+    public bool Pulsing
+    {
+        get
+        {
+            return pulsing;
+        }
+
+        set
+        {
+            pulsing = value;
+            if (!pulsing)
+                transform.localScale = Vector3.one;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
 	    
 	}
 	
@@ -93,6 +111,14 @@ public class Triangle : MonoBehaviour {
             Vector2 shakeVector = Vector2.Lerp(nextShake, lastShake, shakeyShake / SHAKEYNESSSPEED);
             transform.position = new Vector3(x + shakeVector.x, y + shakeVector.y, z);
         }
+        if (pulsing)
+        {
+            pulseTime += Time.deltaTime;
+            if (pulseTime > PULSESPEED * 2)
+                pulseTime -= PULSESPEED * 2;
+            transform.localScale = Vector3.Lerp(Vector3.one, new Vector3(.8f, .8f, .8f), 
+                Mathf.Abs(pulseTime - PULSESPEED)/PULSESPEED);
+        }
 	}
 
     public void move(int xTarget, int yTarget)
@@ -101,6 +127,7 @@ public class Triangle : MonoBehaviour {
         y = yTarget;
         moved = true;
         moveTime = MOVESPEED + Random.value * MOVEDELAY;
+        Pulsing = false;
     }
 
     void BuildTriangle()

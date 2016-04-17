@@ -8,6 +8,8 @@ public class Level : MonoBehaviour {
 
     public GameObject trianglePrefab;
 
+    public Gradient brushColors;
+
     public enum MoveDir : int { up = 0, right = 1, down = 2, left = 3};
     List<Triangle> levelTriangles;
 
@@ -63,13 +65,46 @@ public class Level : MonoBehaviour {
         }
         return tile;
     }
+
+    public void overWriteTrianglesAt(Triangle tri)
+    {
+        foreach (Triangle t in GetComponentsInChildren<Triangle>())
+        {
+            if (t != tri && t.x == tri.x && t.y == tri.y &&
+                (int)tri.direction != (int)(t.direction + 2 % 4))
+            {
+                DestroyImmediate(t.gameObject);
+            }
+        }
+    }
+
+    public void paintTrianglesAt(int x, int y)
+    {
+        foreach (Triangle t in GetComponentsInChildren<Triangle>())
+        {
+            if (t.x == x && t.y == y)
+            {
+                t.color = brushColors.Evaluate(Random.value);
+                t.regenerate = true;
+            }
+        }
+    }
+
+    public void removeTrianglesAt(int x, int y)
+    {
+        foreach (Triangle t in GetComponentsInChildren<Triangle>())
+        {
+            if (t.x == x && t.y == y)
+            {
+                DestroyImmediate(t.gameObject);
+            }
+        }
+    }
 }
 
 [CustomEditor(typeof(Level))]
 public class LevelEditor : Editor
 {
-    Color brushColor = Color.gray;
-
     void OnEnable()
     {
 
@@ -79,27 +114,74 @@ public class LevelEditor : Editor
     {
         base.OnInspectorGUI();
         {
-            brushColor = EditorGUILayout.ColorField(brushColor);
-            
+
         }
     }
 
     void OnSceneGUI()
     {
         Event current = Event.current;
-        if(current.type == EventType.KeyDown && current.keyCode == KeyCode.Space)
+        if(current.type == EventType.KeyDown)
         {
-            GameObject prefab = (GameObject)serializedObject.FindProperty("trianglePrefab").objectReferenceValue;
-            Vector3 pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
-            Triangle tri = GameObject.Instantiate(prefab).GetComponent<Triangle>();
-            tri.transform.parent = ((Level)serializedObject.targetObject).gameObject.transform;
-            tri.x = Mathf.RoundToInt(pos.x);
-            tri.y = Mathf.RoundToInt(pos.y);
-            tri.color = brushColor;
-            tri.regenerate = true;
-            tri.moved = true;
-            tri.name = "triangle";
+            Triangle.Alignment align = Triangle.Alignment.SW;
+            switch(current.keyCode)
+            {
+                case KeyCode.A:
+                    PlaceTriangle(Triangle.Alignment.SW);
+                    break;
+                case KeyCode.S:
+                    PlaceTriangle(Triangle.Alignment.SE);
+                    break;
+                case KeyCode.W:
+                    PlaceTriangle(Triangle.Alignment.NE);
+                    break;
+                case KeyCode.Q:
+                    PlaceTriangle(Triangle.Alignment.NW);
+                    break;
+                case KeyCode.P:
+                    PaintTriangle();
+                    break;
+                case KeyCode.X:
+                    RemoveTriangle();
+                    break;
+                default:
+                    return;
+                    break;
+            }
+
+            
             current.Use();
         }
+    }
+
+    void PaintTriangle()
+    {
+        Vector3 pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
+        Level l = (Level)serializedObject.targetObject;
+        l.paintTrianglesAt(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+    }
+
+    void RemoveTriangle()
+    {
+        Vector3 pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
+        Level l = (Level)serializedObject.targetObject;
+        l.removeTrianglesAt(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+    }
+
+    void PlaceTriangle(Triangle.Alignment align)
+    {
+        GameObject prefab = (GameObject)serializedObject.FindProperty("trianglePrefab").objectReferenceValue;
+        Vector3 pos = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).origin;
+        Triangle tri = GameObject.Instantiate(prefab).GetComponent<Triangle>();
+        Level l = (Level)serializedObject.targetObject;
+        tri.transform.parent = l.gameObject.transform;
+        tri.x = Mathf.RoundToInt(pos.x);
+        tri.y = Mathf.RoundToInt(pos.y);
+        tri.color = l.brushColors.Evaluate(Random.value);
+        tri.direction = align;
+        tri.regenerate = true;
+        tri.moved = true;
+        tri.name = "triangle";
+        l.overWriteTrianglesAt(tri);
     }
 }

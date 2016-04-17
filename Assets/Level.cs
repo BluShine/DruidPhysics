@@ -13,6 +13,10 @@ public class Level : MonoBehaviour {
     public enum MoveDir : int { up = 0, right = 1, down = 2, left = 3};
     List<Triangle> levelTriangles;
 
+    public List<Block> blocks;
+
+    public List<Block> blocksToPush;
+
 	// Use this for initialization
 	void Start () {
         instance = this;
@@ -23,12 +27,33 @@ public class Level : MonoBehaviour {
             levelTriangles.Add(t);
             t.parent = gameObject;
         }
+
+        foreach(Block b in FindObjectsOfType<Block>())
+        {
+            blocks.Add(b);
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public static Vector2 dirToVector(MoveDir dir)
+    {
+        switch(dir)
+        {
+            case MoveDir.up:
+                return new Vector2(0, 1);
+            case MoveDir.down:
+                return new Vector2(0, -1);
+            case MoveDir.left:
+                return new Vector2(-1, 0);
+            case MoveDir.right:
+                return new Vector2(1, 0);
+        }
+        return Vector2.zero;
+    }
 
     public bool canMove(Triangle tri, MoveDir movingTo)
     {
@@ -48,8 +73,52 @@ public class Level : MonoBehaviour {
                 enteringTile = getTrianglesAt(tri.x + 1, tri.y);
                 break;
         }
-        return (getTrianglesAt(tri.x, tri.y).canExitTo(movingTo, tri.direction) &&
-            enteringTile.canEnterFrom(movingTo, tri.direction));
+        return getTrianglesAt(tri.x, tri.y).canExitTo(movingTo, tri.direction) &&
+            enteringTile.canEnterFrom(movingTo, tri.direction) && pushBlocks(tri, movingTo);
+    }
+
+    public bool pushBlocks(Triangle tri, MoveDir moveDirect)
+    {
+        foreach(Block b in blocks)
+        {
+            //make sure that we don't try to collide with ourself or a block that we're already pushing.
+            //and make sure that we don't push a block that we're already pushing.
+            if (tri.parent != b.gameObject && !b.alreadyPushed) 
+            {
+                //pick the tri that we're going to collide with
+                TileState enteringTile = new TileState();
+                switch (moveDirect)
+                {
+                    case MoveDir.up:
+                        enteringTile = b.getTrianglesAt(tri.x, tri.y + 1);
+                        break;
+                    case MoveDir.down:
+                        enteringTile = b.getTrianglesAt(tri.x, tri.y - 1);
+                        break;
+                    case MoveDir.left:
+                        enteringTile = b.getTrianglesAt(tri.x - 1, tri.y);
+                        break;
+                    case MoveDir.right:
+                        enteringTile = b.getTrianglesAt(tri.x + 1, tri.y);
+                        break;
+                }
+                //test collision with the block
+                if (!(b.getTrianglesAt(tri.x, tri.y).canExitTo(moveDirect, tri.direction) &&
+                    enteringTile.canEnterFrom(moveDirect, tri.direction)))
+                {
+                    //see if we can push the block
+                    b.alreadyPushed = true;
+                    if (b.tryPushing(moveDirect))
+                    {
+                        blocksToPush.Add(b);
+                    } else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public TileState getTrianglesAt(int x, int y)

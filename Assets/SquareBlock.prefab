@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
-  color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+  color: {r: 0.52389705, g: 0.61181545, b: 0.6985294, a: 1}
   x: 0
   y: 0
   shakeTime: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+  color: {r: 0.45415223, g: 0.49587154, b: 0.61764705, a: 1}
   x: 0
   y: 0
   shakeTime: 0
@@ -215,7 +215,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: color.r
+      value: 0.45415223
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: color.g
+      value: 0.49587154
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: color.b
+      value: 0.61764705
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moved
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: regenerate
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173402}

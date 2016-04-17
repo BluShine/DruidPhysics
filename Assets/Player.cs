@@ -64,6 +64,7 @@ public class Player : MonoBehaviour {
         if (move)
         {
             moveCooldown = MOVESPEED;
+            Level.instance.blocksToPush = new List<Block>();
             //check if each triangle can move
             bool stopped = false;
             foreach (Triangle tri in playerTriangles)
@@ -100,7 +101,11 @@ public class Player : MonoBehaviour {
             {
                 b.push(dir);
             }
-            Level.instance.blocksToPush = new List<Block>();
+            
+            foreach(Block b in Level.instance.blocks)
+            {
+                b.alreadyPushed = false;
+            }
         }
     }
 }

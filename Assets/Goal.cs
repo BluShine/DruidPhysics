@@ -10,7 +10,7 @@ public class Goal : MonoBehaviour {
     float endingTimer = 0f;
     float implosionTime = 0;
 
-    bool won = false;
+    public bool won = false;
 
     public string nextScene;
 
@@ -43,8 +43,8 @@ public class Goal : MonoBehaviour {
             if(implosionTime > .05f)
             {
                 implosionTime -= .05f;
-                Triangle tri = Level.instance.levelTriangles[Mathf.FloorToInt(Random.value * Level.instance.levelTriangles.Count)];
-                tri.move(Player.instance.eye.x, Player.instance.eye.y);
+                Triangle tri = Level.instance.levelTriangles[Mathf.FloorToInt(Random.value * (Level.instance.levelTriangles.Count - 1))];
+                tri.move(tri.x + Mathf.FloorToInt(Random.value * 6 - 3), tri.y + Mathf.FloorToInt(Random.value * 6 - 3));
             }
         }
 	}

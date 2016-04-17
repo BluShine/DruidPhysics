@@ -106,7 +106,7 @@ public class Level : MonoBehaviour {
                 if (!(b.getTrianglesAt(tri.x, tri.y).canExitTo(moveDirect, tri.direction) &&
                     enteringTile.canEnterFrom(moveDirect, tri.direction)))
                 {
-                    //see if we can push the block
+                    //we collided, but let's see if we can push the block
                     b.alreadyPushed = true;
                     if (b.tryPushing(moveDirect))
                     {

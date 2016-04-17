@@ -43,7 +43,7 @@ public class Block : MonoBehaviour {
         bool stopped = false;
         foreach (Triangle tri in triangles)
         {
-            if (!Level.instance.canMove(tri, Level.MoveDir.right))
+            if (!Level.instance.canMove(tri, dir))
             {
                 tri.shakeTime = Player.MOVESPEED;
                 stopped = true;
@@ -51,11 +51,6 @@ public class Block : MonoBehaviour {
         }
         if (stopped)
             return false;
-        //move
-        foreach (Triangle tri in triangles)
-        {
-            tri.move(tri.x, tri.y);
-        }
         return true;
     }
 

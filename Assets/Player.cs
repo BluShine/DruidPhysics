@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (moveCooldown == 0 && !shifting)
+        if (moveCooldown == 0 && !shifting && !Goal.instance.won)
             movement();
         moveCooldown = Mathf.Max(0, moveCooldown - Time.deltaTime);
 

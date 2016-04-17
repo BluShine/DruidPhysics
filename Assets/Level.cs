@@ -71,9 +71,9 @@ public class Level : MonoBehaviour {
         foreach (Triangle t in GetComponentsInChildren<Triangle>())
         {
             if (t != tri && t.x == tri.x && t.y == tri.y &&
-                (int)tri.direction != (int)(t.direction + 2 % 4))
+                (int)tri.direction % 2 != (int)t.direction % 2)
             {
-                DestroyImmediate(t.gameObject);
+                Undo.DestroyObjectImmediate(t.gameObject);
             }
         }
     }
@@ -84,6 +84,7 @@ public class Level : MonoBehaviour {
         {
             if (t.x == x && t.y == y)
             {
+                Undo.RecordObject(t, "changed triangle color");
                 t.color = brushColors.Evaluate(Random.value);
                 t.regenerate = true;
             }
@@ -96,7 +97,7 @@ public class Level : MonoBehaviour {
         {
             if (t.x == x && t.y == y)
             {
-                DestroyImmediate(t.gameObject);
+                Undo.DestroyObjectImmediate(t.gameObject);
             }
         }
     }
@@ -182,6 +183,7 @@ public class LevelEditor : Editor
         tri.regenerate = true;
         tri.moved = true;
         tri.name = "triangle";
+        Undo.RegisterCreatedObjectUndo(tri.gameObject, "placed triangle");
         l.overWriteTrianglesAt(tri);
     }
 }

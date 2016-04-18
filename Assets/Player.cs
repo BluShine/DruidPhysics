@@ -75,7 +75,6 @@ public class Player : MonoBehaviour {
                         tri.move(tri.x + x, tri.y + y);
                     }
                     shiftTimer = MOVESPEED;
-                    Level.instance.checkGoal();
                 }
                 else
                 {
@@ -86,12 +85,14 @@ public class Player : MonoBehaviour {
                         if (!Level.instance.openTriangle(tri.x, tri.y, tri.direction))
                             badShift = true;
                     }
-                    if(badShift)
+                    if (badShift)
                     {
                         shapeshift();
                     }
-                    else
+                    else {
                         shifting = false;
+                        Level.instance.checkGoal();
+                    }
                 }
             }
         }

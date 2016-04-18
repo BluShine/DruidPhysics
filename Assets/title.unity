@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 263079460}
   - 82: {fileID: 263079459}
+  - 114: {fileID: 263079461}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -187,6 +188,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &263079461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 263079458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7889d220cb16d342a931843c79954d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1103584065
 Prefab:
   m_ObjectHideFlags: 0
@@ -245,6 +257,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5947adc1baf78f4fb7fe88c41561a96, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1379560672 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 159758, guid: e5947adc1baf78f4fb7fe88c41561a96, type: 2}
+  m_PrefabInternal: {fileID: 1103584065}
+--- !u!114 &1379560673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1379560672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899aacbc02b61bc4ba9dc72cf07444c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: level1
 --- !u!1001 &1463980515
 Prefab:
   m_ObjectHideFlags: 0

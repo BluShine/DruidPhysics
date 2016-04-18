@@ -26,6 +26,7 @@ public class Goal : MonoBehaviour {
 
     public void win()
     {
+        SoundMaker.instance.Twinkle();
         won = true;
         endingTimer = LEVELENDANIM;
     }

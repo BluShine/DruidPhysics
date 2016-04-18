@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
@@ -243,7 +245,9 @@ public class Level : MonoBehaviour {
             if (t != tri && t.x == tri.x && t.y == tri.y &&
                 (int)tri.direction % 2 != (int)t.direction % 2)
             {
+#if UNITY_EDITOR
                 Undo.DestroyObjectImmediate(t.gameObject);
+#endif
             }
         }
     }
@@ -254,7 +258,9 @@ public class Level : MonoBehaviour {
         {
             if (t.x == x && t.y == y)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(t, "changed triangle color");
+#endif
                 t.color = brushColors.Evaluate(Random.value);
                 t.regenerate = true;
             }
@@ -267,12 +273,15 @@ public class Level : MonoBehaviour {
         {
             if (t.x == x && t.y == y)
             {
+#if UNITY_EDITOR
                 Undo.DestroyObjectImmediate(t.gameObject);
+#endif
             }
         }
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(Level))]
 public class LevelEditor : Editor
 {
@@ -357,3 +366,4 @@ public class LevelEditor : Editor
         l.overWriteTrianglesAt(tri);
     }
 }
+#endif

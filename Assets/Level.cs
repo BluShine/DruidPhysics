@@ -147,9 +147,11 @@ public class Level : MonoBehaviour {
             {
                 tile.first.Pulsing = true;
                 tile.second.Pulsing = true;
+                SoundMaker.instance.Twinkle();
             } else if (tile.first != null && tile.first.direction == t.direction)
             {
                 tile.first.Pulsing = true;
+                SoundMaker.instance.Twinkle();
             } else
             {
                 goalReached = false;

@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
             {
                 if (shiftStarting)
                 {
-                    
+                    SoundMaker.instance.Shift();
                     shiftStarting = false;
                     int x = eye.x;
                     int y = eye.y;
@@ -113,6 +113,7 @@ public class Player : MonoBehaviour {
 
     private void shapeshift()
     {
+        SoundMaker.instance.Shift();
         shifting = true;
         shiftTimer = MOVESPEED;
         shiftStarting = true;
@@ -167,7 +168,10 @@ public class Player : MonoBehaviour {
                 }
             }
             if (stopped)
+            {
+                SoundMaker.instance.Shake();
                 return;
+            }
             //move our triangles
             foreach (Triangle tri in playerTriangles)
             {
@@ -186,11 +190,13 @@ public class Player : MonoBehaviour {
                         break;
                 }
             }
+            SoundMaker.instance.Clunk();
 
             //move the blocks that we pushed
-            foreach(Block b in Level.instance.blocksToPush)
+            foreach (Block b in Level.instance.blocksToPush)
             {
                 b.push(dir);
+                SoundMaker.instance.Block();
             }
             
             foreach(Block b in Level.instance.blocks)
